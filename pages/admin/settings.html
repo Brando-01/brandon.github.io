@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Poderes - Admin</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-page">
+    <!-- Misma estructura que dashboard.html -->
+    <header class="header admin-header">
+        <div class="container">
+            <div class="logo">
+                <a href="../../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket <span class="admin-badge">Admin</span></h1>
+                </a>
+            </div>
+            <nav class="user-menu">
+                <span>Gestión de Poderes</span>
+                <a href="../user-profile.html">👤 Mi Perfil</a>
+                <a href="#" onclick="logout()">🚪 Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <!-- Mismo sidebar que dashboard.html -->
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-container">
+                <div class="admin-header-content">
+                    <h1>⚡ Gestión de Poderes</h1>
+                    <p>Administra el catálogo de superpoderes</p>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="addNewProduct()">
+                            ➕ Agregar Nuevo Poder
+                        </button>
+                    </div>
+                </div>
+
+                <div class="coming-soon">
+                    <div class="coming-soon-content">
+                        <h2>🚧 En Desarrollo</h2>
+                        <p>Esta sección estará disponible pronto</p>
+                        <button class="btn btn-primary" onclick="window.history.back()">
+                            ← Volver al Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script>
+        function logout() {
+            if (confirm('¿Cerrar sesión?')) {
+                localStorage.removeItem('current_user');
+                window.location.href = '../../index.html';
+            }
+        }
+        
+        function addNewProduct() {
+            alert('Funcionalidad en desarrollo');
+        }
+    </script>
+</body>
+</html>

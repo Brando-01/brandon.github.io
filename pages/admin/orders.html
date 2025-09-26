@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Órdenes - Admin</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-page">
+    <header class="header admin-header">
+        <div class="container">
+            <div class="logo">
+                <a href="../../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket <span class="admin-badge">Admin</span></h1>
+                </a>
+            </div>
+            <nav class="user-menu">
+                <span>Gestión de Órdenes</span>
+                <a href="../user-profile.html">👤 Mi Perfil</a>
+                <a href="#" onclick="logout()">🚪 Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <div class="sidebar-header">
+                    <h3>Panel de Control</h3>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="menu-item">
+                        <a href="dashboard.html" class="menu-link">
+                            <span class="menu-icon">📊</span>
+                            <span class="menu-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="products.html" class="menu-link">
+                            <span class="menu-icon">⚡</span>
+                            <span class="menu-text">Gestión de Poderes</span>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="orders.html" class="menu-link">
+                            <span class="menu-icon">📦</span>
+                            <span class="menu-text">Órdenes</span>
+                            <span class="menu-badge" id="pending-orders-badge">0</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="users.html" class="menu-link">
+                            <span class="menu-icon">👥</span>
+                            <span class="menu-text">Usuarios</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="categories.html" class="menu-link">
+                            <span class="menu-icon">📁</span>
+                            <span class="menu-text">Categorías</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html" class="menu-link">
+                            <span class="menu-icon">📈</span>
+                            <span class="menu-text">Reportes</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-container">
+                <div class="admin-header-content">
+                    <h1>📦 Gestión de Órdenes</h1>
+                    <p>Administra y procesa todas las órdenes del sistema</p>
+                    <div class="header-actions">
+                        <div class="filter-group">
+                            <label for="order-filter">Filtrar por estado:</label>
+                            <select id="order-filter" onchange="filterOrders()">
+                                <option value="all">Todas las órdenes</option>
+                                <option value="pending">Pendientes</option>
+                                <option value="completed">Completadas</option>
+                                <option value="cancelled">Canceladas</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="exportOrders()">
+                            📥 Exportar Órdenes
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="section-stats">
+                        <div class="stat-card">
+                            <span class="stat-number" id="total-orders-count">0</span>
+                            <span class="stat-label">Total Órdenes</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="pending-orders-count">0</span>
+                            <span class="stat-label">Pendientes</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="completed-orders-count">0</span>
+                            <span class="stat-label">Completadas</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="revenue-orders">$0</span>
+                            <span class="stat-label">Ingresos</span>
+                        </div>
+                    </div>
+
+                    <div class="orders-table-container">
+                        <table class="admin-table" id="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Orden</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7" class="no-data">Cargando órdenes...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination-container" id="orders-pagination">
+                        <!-- Paginación se cargará aquí -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script>
+        // Cargar estadísticas básicas
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrdersStats();
+            setTimeout(loadOrdersData, 500);
+        });
+
+        function loadOrdersStats() {
+            const orders = JSON.parse(localStorage.getItem('superpowers_orders')) || [];
+            const total = orders.length;
+            const pending = orders.filter(o => o.status === 'pending').length;
+            const completed = orders.filter(o => o.status === 'completed').length;
+            const revenue = orders.reduce((sum, o) => sum + (o.totals?.total || 0), 0);
+
+            document.getElementById('total-orders-count').textContent = total;
+            document.getElementById('pending-orders-count').textContent = pending;
+            document.getElementById('completed-orders-count').textContent = completed;
+            document.getElementById('revenue-orders').textContent = '$' + revenue.toFixed(2);
+        }
+
+        function loadOrdersData() {
+            const tbody = document.querySelector('#orders-table tbody');
+            const orders = JSON.parse(localStorage.getItem('superpowers_orders')) || [];
+            
+            if (orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="no-data">No hay órdenes registradas</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = orders.map(order => `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${order.userInfo?.email || 'N/A'}</td>
+                    <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+                    <td>${order.items.length} productos</td>
+                    <td>$${order.totals?.total?.toFixed(2) || '0.00'}</td>
+                    <td><span class="status-badge status-${order.status}">${getStatusText(order.status)}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="viewOrder('${order.id}')" title="Ver detalles">👁️</button>
+                        ${order.status === 'pending' ? 
+                            `<button class="btn-action" onclick="completeOrder('${order.id}')" title="Completar orden">✅</button>` : ''}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'Pendiente',
+                'completed': 'Completada',
+                'cancelled': 'Cancelada'
+            };
+            return statusMap[status] || status;
+        }
+
+        function viewOrder(orderId) {
+            alert('Ver orden: ' + orderId + '\n\nFuncionalidad en desarrollo');
+        }
+
+        function completeOrder(orderId) {
+            if (confirm('¿Marcar esta orden como completada?')) {
+                alert('Orden ' + orderId + ' completada\n\nFuncionalidad en desarrollo');
+            }
+        }
+
+        function filterOrders() {
+            alert('Filtrando órdenes...\n\nFuncionalidad en desarrollo');
+        }
+
+        function exportOrders() {
+            alert('Exportando órdenes...\n\nFuncionalidad en desarrollo');
+        }
+    </script>
+</body>
+</html>

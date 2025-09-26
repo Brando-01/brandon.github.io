@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - Admin</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-page">
+    <!-- Misma estructura que orders.html -->
+    <header class="header admin-header">
+        <div class="container">
+            <div class="logo">
+                <a href="../../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket <span class="admin-badge">Admin</span></h1>
+                </a>
+            </div>
+            <nav class="user-menu">
+                <span>Gestión de Usuarios</span>
+                <a href="../user-profile.html">👤 Mi Perfil</a>
+                <a href="#" onclick="logout()">🚪 Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <!-- Sidebar similar -->
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-container">
+                <div class="admin-header-content">
+                    <h1>👥 Gestión de Usuarios</h1>
+                    <p>Administra los usuarios registrados en el sistema</p>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" id="user-search" placeholder="Buscar usuarios...">
+                            <button onclick="searchUsers()">🔍</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="section-stats">
+                        <div class="stat-card">
+                            <span class="stat-number" id="total-users-count">0</span>
+                            <span class="stat-label">Total Usuarios</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="active-users-count">0</span>
+                            <span class="stat-label">Activos</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="new-users-count">0</span>
+                            <span class="stat-label">Nuevos (7 días)</span>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Email</th>
+                                    <th>Registro</th>
+                                    <th>Órdenes</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6" class="no-data">Cargando usuarios...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadUsersData);
+
+        function loadUsersData() {
+            const users = JSON.parse(localStorage.getItem('superpowers_users')) || [];
+            const tbody = document.querySelector('#users-table tbody');
+            
+            // Actualizar stats
+            document.getElementById('total-users-count').textContent = users.filter(u => u.role !== 'admin').length;
+            document.getElementById('active-users-count').textContent = users.filter(u => u.active !== false && u.role !== 'admin').length;
+            
+            // Usuarios nuevos (últimos 7 días)
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const newUsers = users.filter(u => new Date(u.createdAt) > weekAgo && u.role !== 'admin');
+            document.getElementById('new-users-count').textContent = newUsers.length;
+
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">No hay usuarios registrados</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = users.filter(u => u.role !== 'admin').map(user => `
+                <tr>
+                    <td>${user.firstname} ${user.lastname}</td>
+                    <td>${user.email}</td>
+                    <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+                    <td>${getUserOrdersCount(user.id)}</td>
+                    <td><span class="status-badge ${user.active !== false ? 'status-active' : 'status-inactive'}">
+                        ${user.active !== false ? 'Activo' : 'Inactivo'}
+                    </span></td>
+                    <td>
+                        <button class="btn-action" onclick="viewUser(${user.id})" title="Ver detalles">👁️</button>
+                        <button class="btn-action" onclick="toggleUser(${user.id})" title="${user.active !== false ? 'Desactivar' : 'Activar'}">
+                            ${user.active !== false ? '🚫' : '✅'}
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getUserOrdersCount(userId) {
+            const orders = JSON.parse(localStorage.getItem('superpowers_orders')) || [];
+            return orders.filter(o => o.userId == userId).length;
+        }
+
+        function viewUser(userId) {
+            alert('Ver usuario ID: ' + userId + '\n\nFuncionalidad en desarrollo');
+        }
+
+        function toggleUser(userId) {
+            if (confirm('¿Cambiar estado del usuario?')) {
+                alert('Estado del usuario cambiado\n\nFuncionalidad en desarrollo');
+            }
+        }
+
+        function searchUsers() {
+            alert('Buscando usuarios...\n\nFuncionalidad en desarrollo');
+        }
+    </script>
+</body>
+</html>

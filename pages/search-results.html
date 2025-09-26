@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda - PowerMarket</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket</h1>
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar superpoderes...">
+                <button onclick="performSearch()">Buscar</button>
+            </div>
+            <nav class="user-menu">
+                <a href="login.html" id="user-account">Mi Cuenta Heroica</a>
+                <a href="cart.html" id="cart-link">Cinturón de Utilidades (<span id="cart-count">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Navegación de categorías -->
+    <nav class="categories-nav">
+        <div class="container">
+            <a href="../index.html">🏠 Inicio</a>
+            <a href="#" data-category="elementales">Poderes Elementales</a>
+            <a href="#" data-category="mentales">Poderes Mentales</a>
+            <a href="#" data-category="fisicos">Poderes Físicos</a>
+            <a href="#" data-category="transformacion">Transformación</a>
+            <a href="#" data-category="teleportacion">Teletransportación</a>
+            <a href="#" data-category="especiales">Poderes Especiales</a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <div class="search-header">
+                <h1 id="search-title">Resultados de Búsqueda</h1>
+                <p id="search-results-count" class="results-count"></p>
+            </div>
+
+            <div class="search-layout">
+                <!-- Sidebar de filtros -->
+                <aside class="filters-sidebar" id="filters-sidebar">
+                    <!-- Los filtros se cargarán con JavaScript -->
+                </aside>
+
+                <!-- Área de resultados -->
+                <section class="results-area">
+                    <div class="results-controls">
+                        <div class="sort-controls">
+                            <label for="results-sort">Ordenar por:</label>
+                            <select id="results-sort" onchange="applySorting()">
+                                <option value="name-asc">Nombre (A-Z)</option>
+                                <option value="name-desc">Nombre (Z-A)</option>
+                                <option value="price-asc">Precio (Menor a Mayor)</option>
+                                <option value="price-desc">Precio (Mayor a Menor)</option>
+                                <option value="rating">Mejor Valorados</option>
+                                <option value="newest">Más Recientes</option>
+                            </select>
+                        </div>
+                        <div class="view-controls">
+                            <button id="view-grid" class="view-btn active" onclick="setViewMode('grid')">⏹️</button>
+                            <button id="view-list" class="view-btn" onclick="setViewMode('list')">📋</button>
+                        </div>
+                    </div>
+
+                    <div class="results-container">
+                        <div id="search-results" class="products-grid">
+                            <!-- Los resultados se cargarán con JavaScript -->
+                        </div>
+                        <div id="loading-spinner" class="loading-spinner">
+                            <div class="spinner"></div>
+                            <p>Buscando poderes épicos...</p>
+                        </div>
+                        <div id="no-results" class="no-results" style="display: none;">
+                            <div class="no-results-content">
+                                <h2>🚫 No se encontraron poderes</h2>
+                                <p>Intenta con otros términos de búsqueda o explora nuestras categorías.</p>
+                                <button class="btn btn-primary" onclick="window.location.href='../index.html'">
+                                    Volver al Inicio
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paginación -->
+                    <div id="pagination-container" class="pagination-container">
+                        <!-- La paginación se cargará con JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Mi Cuenta Heroica</h3>
+                    <a href="login.html">Iniciar Sesión</a>
+                    <a href="register.html">Registrarse</a>
+                    <a href="user-profile.html">Mis Misiones</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda al Héroe</h3>
+                    <a href="#">Manual de Superpoderes</a>
+                    <a href="#">FAQ de Heroes</a>
+                    <a href="#">Garantías Anti-Villanos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Tipos de Poder</h3>
+                    <a href="#">Poderes Elementales</a>
+                    <a href="#">Poderes Mentales</a>
+                    <a href="#">Poderes Físicos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Soporte Heroico</h3>
+                    <a href="#">soporte@powermarket.com</a>
+                    <a href="#">Línea de Emergencia 24/7</a>
+                    <a href="#">Centro de Entrenamiento</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket. "Grandes poderes con grandes responsabilidades"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="../js/logout.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>

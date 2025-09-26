@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - PowerMarket</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-page">
+    <!-- Header de administración -->
+    <header class="header admin-header">
+        <div class="container">
+            <div class="logo">
+                <a href="../../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket <span class="admin-badge">Admin</span></h1>
+                </a>
+            </div>
+            <nav class="user-menu">
+                <span id="admin-welcome">Panel de Control</span>
+                <a href="../user-profile.html">👤 Mi Perfil</a>
+                <a href="#" onclick="logout()">🚪 Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sidebar de administración -->
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <div class="sidebar-header">
+                    <h3>Panel de Control</h3>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="menu-item active">
+                        <a href="dashboard.html" class="menu-link">
+                            <span class="menu-icon">📊</span>
+                            <span class="menu-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="products.html" class="menu-link">
+                            <span class="menu-icon">⚡</span>
+                            <span class="menu-text">Gestión de Poderes</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="orders.html" class="menu-link">
+                            <span class="menu-icon">📦</span>
+                            <span class="menu-text">Órdenes</span>
+                            <span class="menu-badge" id="pending-orders-badge">0</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="users.html" class="menu-link">
+                            <span class="menu-icon">👥</span>
+                            <span class="menu-text">Usuarios</span>
+                            <span class="menu-badge" id="total-users-badge">0</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="categories.html" class="menu-link">
+                            <span class="menu-icon">📁</span>
+                            <span class="menu-text">Categorías</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="reports.html" class="menu-link">
+                            <span class="menu-icon">📈</span>
+                            <span class="menu-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="menu-section">
+                        <span class="section-label">Configuración</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="settings.html" class="menu-link">
+                            <span class="menu-icon">⚙️</span>
+                            <span class="menu-text">Ajustes</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="admin-content">
+            <div class="admin-container">
+                <!-- Header del dashboard -->
+                <div class="admin-header-content">
+                    <h1>📊 Dashboard de Administración</h1>
+                    <p>Resumen general y métricas del sistema</p>
+                    <div class="header-actions">
+                        <div class="date-filter">
+                            <label for="date-range">Período:</label>
+                            <select id="date-range" onchange="updateDashboard()">
+                                <option value="today">Hoy</option>
+                                <option value="week">Esta semana</option>
+                                <option value="month" selected>Este mes</option>
+                                <option value="quarter">Este trimestre</option>
+                                <option value="year">Este año</option>
+                                <option value="custom">Personalizado</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="exportReport()">
+                            📥 Exportar Reporte
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Métricas principales -->
+                <div class="metrics-grid">
+                    <div class="metric-card revenue">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-info">
+                            <span class="metric-value" id="total-revenue">--</span>
+                            <span class="metric-label">Ingresos Totales</span>
+                            <span class="metric-change" id="revenue-change">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card orders">
+                        <div class="metric-icon">📦</div>
+                        <div class="metric-info">
+                            <span class="metric-value" id="total-orders">--</span>
+                            <span class="metric-label">Órdenes Totales</span>
+                            <span class="metric-change" id="orders-change">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card users">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-info">
+                            <span class="metric-value" id="total-users">--</span>
+                            <span class="metric-label">Usuarios Registrados</span>
+                            <span class="metric-change" id="users-change">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card products">
+                        <div class="metric-icon">⚡</div>
+                        <div class="metric-info">
+                            <span class="metric-value" id="total-products">--</span>
+                            <span class="metric-label">Poderes Activos</span>
+                            <span class="metric-change" id="products-change">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos y estadísticas -->
+                <div class="charts-grid">
+                    <!-- Gráfico de ingresos -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>💰 Ingresos por Mes</h3>
+                            <div class="chart-actions">
+                                <button class="btn-chart active" data-chart="revenue">Ingresos</button>
+                                <button class="btn-chart" data-chart="orders">Órdenes</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-placeholder" id="revenue-chart">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height: 80%"></div>
+                                    <div class="chart-bar" style="height: 60%"></div>
+                                    <div class="chart-bar" style="height: 90%"></div>
+                                    <div class="chart-bar" style="height: 70%"></div>
+                                    <div class="chart-bar" style="height: 85%"></div>
+                                    <div class="chart-bar" style="height: 95%"></div>
+                                </div>
+                                <div class="chart-labels">
+                                    <span>Ene</span><span>Feb</span><span>Mar</span>
+                                    <span>Abr</span><span>May</span><span>Jun</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métricas de productos -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>🔥 Poderes Más Vendidos</h3>
+                        </div>
+                        <div class="top-products" id="top-products">
+                            <!-- Los productos se cargarán con JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actividad reciente -->
+                <div class="activity-section">
+                    <div class="section-header">
+                        <h3>📈 Actividad Reciente</h3>
+                        <button class="btn btn-outline" onclick="viewAllActivity()">
+                            Ver Todo
+                        </button>
+                    </div>
+                    <div class="activity-timeline" id="recent-activity">
+                        <!-- La actividad se cargará con JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Alertas y notificaciones -->
+                <div class="alerts-section">
+                    <div class="section-header">
+                        <h3>⚠️ Alertas del Sistema</h3>
+                    </div>
+                    <div class="alerts-grid" id="system-alerts">
+                        <!-- Las alertas se cargarán con JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer de administración -->
+    <footer class="footer admin-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket - Panel de Administración</p>
+                <span id="server-status" class="status-online">🟢 Sistema en línea</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de carga -->
+    <div id="admin-loading" class="admin-loading" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Cargando datos del dashboard...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+     <script src="../../js/logout.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script src="../../js/admin-dashboard.js"></script>
+</body>
+</html>

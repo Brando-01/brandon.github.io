@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Heroico - PowerMarket</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket</h1>
+                </a>
+            </div>
+            <nav class="user-menu">
+                <span id="user-welcome">Bienvenido, Héroe</span>
+                <a href="user-profile.html" id="user-account">Mi Perfil</a>
+                <a href="cart.html" id="cart-link">Cinturón de Utilidades (<span id="cart-count">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Navegación de checkout -->
+    <nav class="checkout-steps">
+        <div class="container">
+            <div class="steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Información de Envío</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Método de Pago</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Confirmación</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <div class="checkout-layout">
+                <!-- Formularios de checkout -->
+                <div class="checkout-forms">
+                    <!-- Paso 1: Información de envío -->
+                    <form id="shipping-form" class="checkout-step active" data-step="1">
+                        <div class="step-header">
+                            <h2>🚚 Información de Activación</h2>
+                            <p>Donde quieres recibir tus superpoderes</p>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Datos Personales</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="shipping-firstname">Nombre de Héroe *</label>
+                                    <input type="text" id="shipping-firstname" name="firstname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-lastname">Apellido Heroico *</label>
+                                    <input type="text" id="shipping-lastname" name="lastname" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="shipping-email">Email de Contacto *</label>
+                                <input type="email" id="shipping-email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="shipping-phone">Teléfono de Emergencia *</label>
+                                <input type="tel" id="shipping-phone" name="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Dirección de Entrega</h3>
+                            <div class="form-group">
+                                <label for="shipping-address">Dirección de la Base Secreta *</label>
+                                <input type="text" id="shipping-address" name="address" required placeholder="Ej: Calle Heroica 123">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="shipping-city">Ciudad *</label>
+                                    <input type="text" id="shipping-city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-zip">Código Postal *</label>
+                                    <input type="text" id="shipping-zip" name="zip" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="shipping-country">Planeta/Dimensión *</label>
+                                <select id="shipping-country" name="country" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="earth">Tierra</option>
+                                    <option value="asgard">Asgard</option>
+                                    <option value="krypton">Krypton</option>
+                                    <option value="wakanda">Wakanda</option>
+                                    <option value="other">Otra Dimensión</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Método de Entrega</h3>
+                            <div class="delivery-options">
+                                <label class="delivery-option">
+                                    <input type="radio" name="delivery-method" value="standard" checked>
+                                    <span class="delivery-info">
+                                        <span class="delivery-name">Entrega Estándar</span>
+                                        <span class="delivery-desc">Teletransporte básico (3-5 días)</span>
+                                        <span class="delivery-price">Gratis</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="delivery-option">
+                                    <input type="radio" name="delivery-method" value="express">
+                                    <span class="delivery-info">
+                                        <span class="delivery-name">Entrega Express</span>
+                                        <span class="delivery-desc">Teletransporte supersónico (24 horas)</span>
+                                        <span class="delivery-price">$99.00</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="delivery-option">
+                                    <input type="radio" name="delivery-method" value="instant">
+                                    <span class="delivery-info">
+                                        <span class="delivery-name">Entrega Instantánea</span>
+                                        <span class="delivery-desc">Teletransporte inmediato (¡Ahora mismo!)</span>
+                                        <span class="delivery-price">$199.00</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-outline" onclick="window.location.href='cart.html'">
+                                ← Volver al Carrito
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="goToStep(2)">
+                                Continuar al Pago →
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Paso 2: Método de pago -->
+                    <form id="payment-form" class="checkout-step" data-step="2">
+                        <div class="step-header">
+                            <h2>💳 Método de Pago Heroico</h2>
+                            <p>Como prefieres realizar el intercambio de energía</p>
+                        </div>
+
+                        <div class="payment-methods">
+                            <div class="payment-tabs">
+                                <button type="button" class="payment-tab active" data-method="credit-card">
+                                    💳 Tarjeta de Crédito
+                                </button>
+                                <button type="button" class="payment-tab" data-method="qr">
+                                    📱 Código QR
+                                </button>
+                                <button type="button" class="payment-tab" data-method="crypto">
+                                    ₿ Cripto-Energía
+                                </button>
+                            </div>
+
+                            <!-- Tarjeta de crédito -->
+                            <div class="payment-method active" id="credit-card-method">
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label for="card-number">Número de Tarjeta *</label>
+                                        <input type="text" id="card-number" name="cardNumber" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="card-expiry">Fecha de Expiración *</label>
+                                            <input type="text" id="card-expiry" name="cardExpiry" placeholder="MM/AA">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="card-cvc">CVC *</label>
+                                            <input type="text" id="card-cvc" name="cardCvc" placeholder="123">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="card-name">Nombre en la Tarjeta *</label>
+                                        <input type="text" id="card-name" name="cardName" placeholder="SUPER HEROE">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Código QR -->
+                            <div class="payment-method" id="qr-method">
+                                <div class="qr-payment">
+                                    <div class="qr-code">
+                                        <div class="qr-placeholder">
+                                            <span>📱</span>
+                                            <p>Escanea este código con tu app de pagos</p>
+                                        </div>
+                                    </div>
+                                    <div class="qr-info">
+                                        <h4>Pago por Código QR</h4>
+                                        <p>Usa Yape, Plin, o cualquier app de pagos móviles</p>
+                                        <div class="qr-amount">
+                                            <strong>Monto a pagar:</strong>
+                                            <span id="qr-amount">--</span>
+                                        </div>
+                                        <div class="qr-instructions">
+                                            <p>1. Abre tu app de pagos</p>
+                                            <p>2. Escanea el código QR</p>
+                                            <p>3. Confirma el pago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cripto -->
+                            <div class="payment-method" id="crypto-method">
+                                <div class="crypto-payment">
+                                    <div class="crypto-info">
+                                        <h4>Pago con Cripto-Energía</h4>
+                                        <p>Intercambio de energía pura y descentralizada</p>
+                                        
+                                        <div class="crypto-options">
+                                            <label class="crypto-option">
+                                                <input type="radio" name="crypto-type" value="bitcoin" checked>
+                                                <span>Bitcoin (BTC)</span>
+                                            </label>
+                                            <label class="crypto-option">
+                                                <input type="radio" name="crypto-type" value="ethereum">
+                                                <span>Ethereum (ETH)</span>
+                                            </label>
+                                            <label class="crypto-option">
+                                                <input type="radio" name="crypto-type" value="dogecoin">
+                                                <span>Dogecoin (DOGE)</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="crypto-address">
+                                            <label>Dirección de la Billetera:</label>
+                                            <code id="crypto-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+                                            <button type="button" class="btn-copy" onclick="copyCryptoAddress()">
+                                                Copiar
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="crypto-amount">
+                                            <strong>Monto equivalente:</strong>
+                                            <span id="crypto-amount">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-outline" onclick="goToStep(1)">
+                                ← Volver a Envío
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="goToStep(3)">
+                                Revisar Pedido →
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Paso 3: Confirmación -->
+                    <div id="confirmation-step" class="checkout-step" data-step="3">
+                        <div class="step-header">
+                            <h2>✅ Confirmar Pedido Heroico</h2>
+                            <p>Revisa que todo esté correcto antes de la activación</p>
+                        </div>
+
+                        <div class="confirmation-sections">
+                            <div class="confirmation-section">
+                                <h3>📦 Resumen del Pedido</h3>
+                                <div id="order-summary-items">
+                                    <!-- Los items se cargarán con JavaScript -->
+                                </div>
+                            </div>
+
+                            <div class="confirmation-section">
+                                <h3>🚚 Información de Entrega</h3>
+                                <div id="shipping-summary">
+                                    <!-- La información de envío se cargará con JavaScript -->
+                                </div>
+                            </div>
+
+                            <div class="confirmation-section">
+                                <h3>💳 Información de Pago</h3>
+                                <div id="payment-summary">
+                                    <!-- La información de pago se cargará con JavaScript -->
+                                </div>
+                            </div>
+
+                            <div class="confirmation-total">
+                                <div class="total-row">
+                                    <span>Total del Pedido:</span>
+                                    <strong id="confirmation-total">--</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="confirmation-actions">
+                            <button type="button" class="btn btn-outline" onclick="goToStep(2)">
+                                ← Editar Pago
+                            </button>
+                            <button type="button" class="btn btn-primary btn-large" onclick="completeOrder()">
+                                🚀 Confirmar y Activar Poderes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen del pedido -->
+                <aside class="checkout-summary">
+                    <div class="summary-card">
+                        <h3>Tu Pedido</h3>
+                        <div id="checkout-items">
+                            <!-- Los items del carrito se cargarán con JavaScript -->
+                        </div>
+                        
+                        <div class="summary-totals">
+                            <div class="total-row">
+                                <span>Subtotal:</span>
+                                <span id="summary-subtotal">--</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Envío:</span>
+                                <span id="summary-shipping">--</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Impuestos:</span>
+                                <span id="summary-tax">--</span>
+                            </div>
+                            <div class="total-row grand-total">
+                                <span>Total:</span>
+                                <span id="summary-total">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="security-badge">
+                        <div class="security-icon">🛡️</div>
+                        <div class="security-text">
+                            <strong>Compra 100% Segura</strong>
+                            <small>Tus datos están protegidos con encriptación de nivel máximo</small>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Mi Cuenta Heroica</h3>
+                    <a href="user-profile.html">Mis Misiones</a>
+                    <a href="user-profile.html">Mis Poderes</a>
+                    <a href="user-profile.html">Configuración</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda al Héroe</h3>
+                    <a href="#">Soporte 24/7</a>
+                    <a href="#">Guía de Activación</a>
+                    <a href="#">Política de Garantías</a>
+                </div>
+                <div class="footer-section">
+                    <h3>PowerMarket</h3>
+                    <a href="../index.html">Inicio</a>
+                    <a href="search-results.html">Todos los Poderes</a>
+                    <a href="#">Sobre Nosotros</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket. "Grandes poderes con grandes responsabilidades"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de éxito -->
+    <div id="success-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content success-modal">
+            <div class="modal-icon">🎉</div>
+            <h2>¡Activación Exitosa!</h2>
+            <p>Tu pedido ha sido procesado correctamente. Los superpoderes están en camino.</p>
+            <div class="order-details">
+                <p><strong>Número de Orden:</strong> <span id="order-number">--</span></p>
+                <p><strong>Fecha de Entrega Estimada:</strong> <span id="delivery-date">--</span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="viewOrder()">Ver Detalles del Pedido</button>
+                <button class="btn btn-outline" onclick="goHome()">Volver al Inicio</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+     <script src="../js/logout.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/checkout.js"></script>
+</body>
+</html>

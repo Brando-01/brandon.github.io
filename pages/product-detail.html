@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Poder - PowerMarket</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket</h1>
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar superpoderes...">
+                <button onclick="performSearch()">Buscar</button>
+            </div>
+            <nav class="user-menu">
+                <a href="login.html" id="user-account">Mi Cuenta Heroica</a>
+                <a href="cart.html" id="cart-link">Cinturón de Utilidades (<span id="cart-count">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Navegación de categorías -->
+    <nav class="categories-nav">
+        <div class="container">
+            <a href="../index.html">🏠 Inicio</a>
+            <a href="search-results.html">🔍 Todos los Poderes</a>
+            <a href="#" id="breadcrumb-category"></a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Ruta de navegación -->
+            <nav class="breadcrumb">
+                <a href="../index.html">Inicio</a>
+                <span>▶</span>
+                <a href="search-results.html">Poderes</a>
+                <span>▶</span>
+                <span id="breadcrumb-current">Detalle del Poder</span>
+            </nav>
+
+            <div class="product-detail-container">
+                <!-- Galería de imágenes -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <div class="product-image-large" id="main-product-image">
+                            <!-- Imagen principal se cargará con JS -->
+                        </div>
+                    </div>
+                    <div class="image-thumbnails" id="image-thumbnails">
+                        <!-- Miniaturas se cargarán con JS -->
+                    </div>
+                </div>
+
+                <!-- Información del producto -->
+                <div class="product-info">
+                    <div class="product-header">
+                        <div class="product-badges" id="product-badges">
+                            <!-- Badges se cargarán con JS -->
+                        </div>
+                        <h1 id="product-title">Cargando poder...</h1>
+                        <div class="product-rating" id="product-rating">
+                            <!-- Rating se cargará con JS -->
+                        </div>
+                    </div>
+
+                    <div class="product-pricing">
+                        <div class="current-price" id="current-price">--</div>
+                        <div class="original-price" id="original-price"></div>
+                        <div class="discount-badge" id="discount-badge"></div>
+                    </div>
+
+                    <div class="product-meta-details">
+                        <div class="meta-item">
+                            <span class="meta-label">⚡ Rareza:</span>
+                            <span class="meta-value" id="meta-rarity">--</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">🎯 Nivel:</span>
+                            <span class="meta-value" id="meta-level">--</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">⏱️ Duración:</span>
+                            <span class="meta-value" id="meta-duration">--</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">📦 Stock:</span>
+                            <span class="meta-value" id="meta-stock">--</span>
+                        </div>
+                    </div>
+
+                    <div class="product-description-full">
+                        <h3>📖 Descripción del Poder</h3>
+                        <p id="product-description">Cargando descripción...</p>
+                    </div>
+
+                    <div class="product-requirements">
+                        <h3>🎓 Requisitos</h3>
+                        <p id="product-requirements">Cargando requisitos...</p>
+                    </div>
+
+                    <div class="product-actions-detail">
+                        <div class="quantity-selector">
+                            <label for="quantity">Cantidad:</label>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQuantity()">-</button>
+                                <input type="number" id="quantity" value="1" min="1" max="10">
+                                <button class="qty-btn" onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary btn-large" id="add-to-cart-btn" onclick="addToCartFromDetail()">
+                                🛒 Agregar al Cinturón
+                            </button>
+                            <button class="btn btn-outline btn-large" onclick="addToWishlist()">
+                                💖 Guardar para Después
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-features">
+                        <div class="feature">
+                            <span class="feature-icon">🛡️</span>
+                            <span class="feature-text">Garantía de 10 años contra villanos</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🚚</span>
+                            <span class="feature-text">Entrega inmediata por teletransporte</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">📞</span>
+                            <span class="feature-text">Soporte heroico 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productos relacionados -->
+            <section class="related-products">
+                <h2>✨ Poderes Relacionados</h2>
+                <div class="products-grid" id="related-products">
+                    <!-- Productos relacionados se cargarán con JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Mi Cuenta Heroica</h3>
+                    <a href="login.html">Iniciar Sesión</a>
+                    <a href="register.html">Registrarse</a>
+                    <a href="user-profile.html">Mis Misiones</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda al Héroe</h3>
+                    <a href="#">Manual de Superpoderes</a>
+                    <a href="#">FAQ de Heroes</a>
+                    <a href="#">Garantías Anti-Villanos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Tipos de Poder</h3>
+                    <a href="#">Poderes Elementales</a>
+                    <a href="#">Poderes Mentales</a>
+                    <a href="#">Poderes Físicos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Soporte Heroico</h3>
+                    <a href="#">soporte@powermarket.com</a>
+                    <a href="#">Línea de Emergencia 24/7</a>
+                    <a href="#">Centro de Entrenamiento</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket. "Grandes poderes con grandes responsabilidades"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="../js/logout.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/product-detail.js"></script>
+</body>
+</html>

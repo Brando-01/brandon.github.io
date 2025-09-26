@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión Heroica - PowerMarket</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body class="auth-page">
+    <!-- Header simplificado para páginas de auth -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket</h1>
+                </a>
+            </div>
+            <nav class="user-menu">
+                <a href="../index.html">🏠 Volver al Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <div class="auth-icon">🦸‍♂️</div>
+                        <h1>Iniciar Sesión Heroica</h1>
+                        <p>Accede a tu cuenta para gestionar tus superpoderes</p>
+                    </div>
+
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email">📧 Correo Electrónico</label>
+                            <input 
+                                type="email" 
+                                id="login-email" 
+                                name="email" 
+                                required
+                                placeholder="tu.email@heroe.com"
+                            >
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">🔒 Contraseña</label>
+                            <input 
+                                type="password" 
+                                id="login-password" 
+                                name="password" 
+                                required
+                                placeholder="Tu contraseña secreta"
+                            >
+                            <div class="error-message" id="password-error"></div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="remember-me" name="remember-me">
+                                <span class="checkmark"></span>
+                                Recordar mi sesión
+                            </label>
+                            <a href="forgot-password.html" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large auth-btn">
+                            🚀 Iniciar Sesión Heroica
+                        </button>
+
+                        <div class="auth-divider">
+                            <span>o continúa con</span>
+                        </div>
+
+                        <div class="social-auth">
+                            <button type="button" class="btn btn-social btn-google">
+                                <span class="social-icon">🔍</span>
+                                Google
+                            </button>
+                            <button type="button" class="btn btn-social btn-facebook">
+                                <span class="social-icon">👥</span>
+                                Facebook
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="auth-footer">
+                        <p>¿Nuevo en PowerMarket? <a href="register.html">¡Regístrate como Héroe!</a></p>
+                    </div>
+                </div>
+
+                <div class="auth-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Acceso Rápido</h3>
+                        <p>Gestiona todos tus superpoderes desde un solo lugar</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Seguridad Heroica</h3>
+                        <p>Tus datos protegidos con encriptación de nivel máximo</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Historial de Misiones</h3>
+                        <p>Revisa todas tus compras y entrenamientos anteriores</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer simplificado -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket. "Grandes poderes con grandes responsabilidades"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="../js/logout.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

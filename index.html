@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerMarket - Tu Tienda de Superpoderes</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>⚡ PowerMarket</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar superpoderes...">
+                <button onclick="performSearch()">Buscar</button>
+            </div>
+            <nav class="user-menu">
+                <a href="pages/login.html" id="user-account">Mi Cuenta Heroica</a>
+                <a href="pages/cart.html" id="cart-link">Cinturón de Utilidades (<span id="cart-count">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Navegación de categorías -->
+    <nav class="categories-nav">
+        <div class="container">
+            <a href="#" data-category="elementales">Poderes Elementales</a>
+            <a href="#" data-category="mentales">Poderes Mentales</a>
+            <a href="#" data-category="fisicos">Poderes Físicos</a>
+            <a href="#" data-category="transformacion">Transformación</a>
+            <a href="#" data-category="teleportacion">Teletransportación</a>
+            <a href="#" data-category="especiales">Poderes Especiales</a>
+        </div>
+    </nav>
+
+    <!-- Banner principal -->
+    <section class="hero-banner">
+        <div class="container">
+            <h2>¡Desbloquea Tu Potencial Heroico!</h2>
+            <p>Superpoderes certificados con garantía de 10 años contra villanos</p>
+            <button class="btn btn-primary">Ver Poderes Disponibles</button>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Categorías destacadas -->
+            <section class="featured-categories">
+                <h2 class="section-title">Categorías de Poderes</h2>
+                <div class="categories-grid" id="featured-categories">
+                    <!-- Las categorías se cargarán con JavaScript -->
+                </div>
+            </section>
+
+            <!-- Poderes más vendidos -->
+            <section class="best-sellers">
+                <h2 class="section-title">Poderes Más Vendidos del Mes</h2>
+                <div class="products-grid" id="best-sellers">
+                    <!-- Los poderes se cargarán con JavaScript -->
+                </div>
+            </section>
+
+            <!-- Nuevas categorías -->
+            <section class="new-categories">
+                <h2 class="section-title">Nuevas Líneas de Poder</h2>
+                <div class="categories-panels" id="new-categories">
+                    <!-- Las categorías nuevas se cargarán con JavaScript -->
+                </div>
+            </section>
+
+            <!-- Poderes nuevos -->
+            <section class="new-products">
+                <h2 class="section-title">Poderes Recién Llegados</h2>
+                <div class="products-grid" id="new-products">
+                    <!-- Los poderes nuevos se cargarán con JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Mi Cuenta Heroica</h3>
+                    <a href="pages/login.html">Iniciar Sesión</a>
+                    <a href="pages/register.html">Registrarse</a>
+                    <a href="pages/user-profile.html">Mis Misiones</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda al Héroe</h3>
+                    <a href="#">Manual de Superpoderes</a>
+                    <a href="#">FAQ de Heroes</a>
+                    <a href="#">Garantías Anti-Villanos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Tipos de Poder</h3>
+                    <a href="#">Poderes Elementales</a>
+                    <a href="#">Poderes Mentales</a>
+                    <a href="#">Poderes Físicos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Soporte Heroico</h3>
+                    <a href="#">soporte@powermarket.com</a>
+                    <a href="#">Línea de Emergencia 24/7</a>
+                    <a href="#">Centro de Entrenamiento</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket. "Grandes poderes con grandes responsabilidades"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/logout.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

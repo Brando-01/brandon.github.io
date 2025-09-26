@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinturón de Utilidades - PowerMarket</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket</h1>
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar superpoderes...">
+                <button onclick="performSearch()">Buscar</button>
+            </div>
+            <nav class="user-menu">
+                <a href="login.html" id="user-account">Mi Cuenta Heroica</a>
+                <a href="cart.html" id="cart-link">Cinturón de Utilidades (<span id="cart-count">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Navegación de categorías -->
+    <nav class="categories-nav">
+        <div class="container">
+            <a href="../index.html">🏠 Inicio</a>
+            <a href="search-results.html">🔍 Todos los Poderes</a>
+            <a href="cart.html" class="active">🛒 Mi Cinturón</a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Ruta de navegación -->
+            <nav class="breadcrumb">
+                <a href="../index.html">Inicio</a>
+                <span>▶</span>
+                <span>Cinturón de Utilidades</span>
+            </nav>
+
+            <div class="cart-layout">
+                <!-- Contenido principal del carrito -->
+                <div class="cart-main">
+                    <div class="cart-header">
+                        <h1>🛒 Tu Cinturón de Utilidades</h1>
+                        <p>Revisa y gestiona los superpoderes que has seleccionado</p>
+                    </div>
+
+                    <!-- Carrito vacío -->
+                    <div id="empty-cart" class="empty-cart" style="display: none;">
+                        <div class="empty-cart-content">
+                            <div class="empty-cart-icon">🎒</div>
+                            <h2>Tu cinturón está vacío</h2>
+                            <p>¡Aún no has agregado ningún superpoder! Explora nuestros poderes y comienza tu journey heroico.</p>
+                            <div class="empty-cart-actions">
+                                <button class="btn btn-primary" onclick="window.location.href='search-results.html'">
+                                    🔍 Explorar Poderes
+                                </button>
+                                <button class="btn btn-outline" onclick="window.location.href='../index.html'">
+                                    🏠 Volver al Inicio
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carrito con items -->
+                    <div id="cart-with-items" style="display: none;">
+                        <!-- Items del carrito -->
+                        <div class="cart-items-section">
+                            <h2>Poderes Seleccionados</h2>
+                            <div id="cart-items-container">
+                                <!-- Los items del carrito se cargarán con JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Resumen del pedido -->
+                        <div class="order-summary">
+                            <h3>📋 Resumen del Pedido</h3>
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Subtotal:</span>
+                                    <span id="subtotal-amount">--</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Costo de Activación:</span>
+                                    <span id="shipping-amount">Gratis</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Impuestos Heroicos:</span>
+                                    <span id="tax-amount">--</span>
+                                </div>
+                                <div class="summary-row total">
+                                    <span><strong>Total:</strong></span>
+                                    <span id="total-amount"><strong>--</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="checkout-actions">
+                                <button class="btn btn-primary btn-large" onclick="proceedToCheckout()">
+                                    🚀 Proceder al Checkout Heroico
+                                </button>
+                                <button class="btn btn-outline" onclick="continueShopping()">
+                                    ← Seguir Explorando
+                                </button>
+                            </div>
+
+                            <div class="security-features">
+                                <div class="security-item">
+                                    <span class="security-icon">🛡️</span>
+                                    <span>Compra 100% segura</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="security-icon">⚡</span>
+                                    <span>Entrega inmediata</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="security-icon">🎯</span>
+                                    <span>Garantía anti-villanos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de guardados para después -->
+                <aside class="saved-items-sidebar">
+                    <div class="saved-header">
+                        <h3>💾 Guardados para Después</h3>
+                        <p>Poderes que has guardado para futuras misiones</p>
+                    </div>
+
+                    <div id="saved-items-container">
+                        <!-- Los items guardados se cargarán con JavaScript -->
+                    </div>
+
+                    <div id="empty-saved" class="empty-saved">
+                        <p>No tienes poderes guardados</p>
+                        <small>Haz clic en "Guardar para después" en cualquier poder para agregarlo aquí</small>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Productos recomendados -->
+            <section class="recommended-products">
+                <h2>✨ Podrías Necesitar También</h2>
+                <div class="products-grid" id="recommended-products">
+                    <!-- Productos recomendados se cargarán con JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Mi Cuenta Heroica</h3>
+                    <a href="login.html">Iniciar Sesión</a>
+                    <a href="register.html">Registrarse</a>
+                    <a href="user-profile.html">Mis Misiones</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda al Héroe</h3>
+                    <a href="#">Manual de Superpoderes</a>
+                    <a href="#">FAQ de Heroes</a>
+                    <a href="#">Garantías Anti-Villanos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Tipos de Poder</h3>
+                    <a href="#">Poderes Elementales</a>
+                    <a href="#">Poderes Mentales</a>
+                    <a href="#">Poderes Físicos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Soporte Heroico</h3>
+                    <a href="#">soporte@powermarket.com</a>
+                    <a href="#">Línea de Emergencia 24/7</a>
+                    <a href="#">Centro de Entrenamiento</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket. "Grandes poderes con grandes responsabilidades"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="../js/logout.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/cart.js"></script>
+</body>
+</html>

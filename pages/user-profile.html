@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil Heroico - PowerMarket</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h1>⚡ PowerMarket</h1>
+                </a>
+            </div>
+            <nav class="user-menu">
+                <span id="user-welcome">Bienvenido, Héroe</span>
+                <a href="cart.html" id="cart-link">Cinturón de Utilidades (<span id="cart-count">0</span>)</a>
+                <a href="#" onclick="logout()">🚪 Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Navegación de perfil -->
+    <nav class="profile-nav">
+        <div class="container">
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-tab="overview">📊 Resumen</button>
+                <button class="profile-tab" data-tab="orders">📦 Mis Misiones</button>
+                <button class="profile-tab" data-tab="powers">⚡ Mis Poderes</button>
+                <button class="profile-tab" data-tab="settings">⚙️ Configuración</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Pestaña: Resumen -->
+            <div class="profile-tab-content active" id="overview-tab">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <div class="avatar-placeholder">🦸‍♂️</div>
+                        <button class="btn-avatar-edit" onclick="editAvatar()">✏️</button>
+                    </div>
+                    <div class="profile-info">
+                        <h1 id="profile-name">Cargando...</h1>
+                        <p class="profile-email" id="profile-email">--</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number" id="stat-orders">0</span>
+                                <span class="stat-label">Misiones Completadas</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="stat-powers">0</span>
+                                <span class="stat-label">Poderes Adquiridos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="stat-member">Nuevo</span>
+                                <span class="stat-label">Nivel Heroico</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-grid">
+                    <!-- Misión reciente -->
+                    <div class="overview-card">
+                        <h3>🎯 Misión Reciente</h3>
+                        <div id="recent-order">
+                            <p class="no-data">No hay misiones recientes</p>
+                        </div>
+                    </div>
+
+                    <!-- Poderes activos -->
+                    <div class="overview-card">
+                        <h3>⚡ Poderes Activos</h3>
+                        <div id="active-powers">
+                            <p class="no-data">No hay poderes activos</p>
+                        </div>
+                    </div>
+
+                    <!-- Recompensas -->
+                    <div class="overview-card">
+                        <h3>🏆 Recompensas</h3>
+                        <div class="rewards">
+                            <div class="reward-item">
+                                <span class="reward-icon">⭐</span>
+                                <span class="reward-text">Héroe Novato</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">🔔</span>
+                                <span class="reward-text">Notificaciones activas</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline btn-small">Ver Todas las Recompensas</button>
+                    </div>
+
+                    <!-- Actividad reciente -->
+                    <div class="overview-card">
+                        <h3>📈 Actividad Reciente</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <span class="activity-icon">🛒</span>
+                                <span class="activity-text">Te uniste a PowerMarket</span>
+                                <span class="activity-time" id="join-date">--</span>
+                            </div>
+                            <div id="recent-activities">
+                                <!-- Las actividades se cargarán con JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña: Mis Misiones (Órdenes) -->
+            <div class="profile-tab-content" id="orders-tab">
+                <div class="tab-header">
+                    <h2>📦 Historial de Misiones</h2>
+                    <p>Todas tus compras y pedidos de superpoderes</p>
+                </div>
+
+                <div class="orders-filters">
+                    <div class="filter-group">
+                        <label for="order-status">Filtrar por estado:</label>
+                        <select id="order-status" onchange="filterOrders()">
+                            <option value="all">Todas las misiones</option>
+                            <option value="completed">Completadas</option>
+                            <option value="pending">Pendientes</option>
+                            <option value="cancelled">Canceladas</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="order-date">Filtrar por fecha:</label>
+                        <select id="order-date" onchange="filterOrders()">
+                            <option value="all">Todas las fechas</option>
+                            <option value="month">Este mes</option>
+                            <option value="3months">Últimos 3 meses</option>
+                            <option value="year">Este año</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="orders-list" id="orders-list">
+                    <!-- Las órdenes se cargarán con JavaScript -->
+                </div>
+
+                <div class="pagination-container" id="orders-pagination">
+                    <!-- La paginación se cargará con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Pestaña: Mis Poderes -->
+            <div class="profile-tab-content" id="powers-tab">
+                <div class="tab-header">
+                    <h2>⚡ Mi Inventario de Poderes</h2>
+                    <p>Gestiona todos los superpoderes que has adquirido</p>
+                </div>
+
+                <div class="powers-grid" id="powers-grid">
+                    <!-- Los poderes adquiridos se cargarán con JavaScript -->
+                </div>
+
+                <div class="no-powers" id="no-powers" style="display: none;">
+                    <div class="no-data-content">
+                        <div class="no-data-icon">🎁</div>
+                        <h3>¡Aún no tienes superpoderes!</h3>
+                        <p>Explora nuestro catálogo y comienza tu journey heroico</p>
+                        <button class="btn btn-primary" onclick="window.location.href='search-results.html'">
+                            Explorar Poderes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña: Configuración -->
+            <div class="profile-tab-content" id="settings-tab">
+                <div class="tab-header">
+                    <h2>⚙️ Configuración de Cuenta</h2>
+                    <p>Gestiona tu información personal y preferencias</p>
+                </div>
+
+                <div class="settings-sections">
+                    <!-- Información Personal -->
+                    <div class="settings-section">
+                        <h3>👤 Información Personal</h3>
+                        <form id="personal-info-form" class="settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="settings-firstname">Nombre</label>
+                                    <input type="text" id="settings-firstname" name="firstname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settings-lastname">Apellido</label>
+                                    <input type="text" id="settings-lastname" name="lastname">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-email">Email</label>
+                                <input type="email" id="settings-email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-phone">Teléfono</label>
+                                <input type="tel" id="settings-phone" name="phone">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </form>
+                    </div>
+
+                    <!-- Seguridad -->
+                    <div class="settings-section">
+                        <h3>🔒 Seguridad</h3>
+                        <form id="password-form" class="settings-form">
+                            <div class="form-group">
+                                <label for="current-password">Contraseña Actual</label>
+                                <input type="password" id="current-password" name="currentPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Nueva Contraseña</label>
+                                <input type="password" id="new-password" name="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirmar Nueva Contraseña</label>
+                                <input type="password" id="confirm-password" name="confirmPassword">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                        </form>
+                    </div>
+
+                    <!-- Preferencias -->
+                    <div class="settings-section">
+                        <h3>🎯 Preferencias</h3>
+                        <div class="preferences">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pref-newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                Recibir newsletter con nuevos poderes
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pref-notifications" name="notifications" checked>
+                                <span class="checkmark"></span>
+                                Notificaciones de ofertas especiales
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pref-sms" name="sms">
+                                <span class="checkmark"></span>
+                                Alertas por SMS
+                            </label>
+                        </div>
+                        <button class="btn btn-primary">Guardar Preferencias</button>
+                    </div>
+
+                    <!-- Zona Peligrosa -->
+                    <div class="settings-section danger-zone">
+                        <h3>⚠️ Zona Peligrosa</h3>
+                        <div class="danger-actions">
+                            <p>Estas acciones no se pueden deshacer</p>
+                            <button class="btn btn-danger" onclick="exportData()">📥 Exportar Mis Datos</button>
+                            <button class="btn btn-danger" onclick="requestAccountDeletion()">🗑️ Solicitar Eliminación de Cuenta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Mi Cuenta Heroica</h3>
+                    <a href="user-profile.html">Mi Perfil</a>
+                    <a href="cart.html">Mi Cinturón</a>
+                    <a href="search-results.html">Explorar Poderes</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda al Héroe</h3>
+                    <a href="#">Centro de Ayuda</a>
+                    <a href="#">Contactar Soporte</a>
+                    <a href="#">Política de Privacidad</a>
+                </div>
+                <div class="footer-section">
+                    <h3>PowerMarket</h3>
+                    <a href="../index.html">Inicio</a>
+                    <a href="#">Sobre Nosotros</a>
+                    <a href="#">Términos de Servicio</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PowerMarket. "Grandes poderes con grandes responsabilidades"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="../js/logout.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/user-profile.js"></script>
+</body>
+</html>
